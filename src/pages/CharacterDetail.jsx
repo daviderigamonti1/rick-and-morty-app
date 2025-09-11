@@ -23,10 +23,12 @@ export default function CharacterDetail() {
         <div className="character-detail">
             <img src={character.image} alt={character.name} />
             <div>
-                <div className="character-content"><span>Nome:</span> <h2>{character.name}</h2></div>
-                <div className="character-content">Stato: <h2>{character.status}</h2></div>
-                <div className="character-content">Specie: <h2>{character.species}</h2></div>
-                <div className="character-content">Genere: <h2>{character.gender}</h2></div>
+                <p className="character-content">Nome: <strong>{character.name}</strong></p>
+                <p className="character-content">Stato: <strong>{character.status}</strong></p>
+                <p className="character-content">Specie: <strong>{character.species}</strong></p>
+                <p className="character-content">Genere: <strong>{character.gender}</strong></p>
+                <p className="character-content">Origine: <strong>{character.origin.name}</strong></p>
+                <p className="character-content">Ultima posizione conosciuta: <strong>{character.location.name}</strong></p>
             </div>
         </div>
     )
