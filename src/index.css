@@ -111,3 +111,11 @@ ul {
 .character-detail img {
   margin: 20px;
 }
+
+/** PAGINAZIONE **/
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  color: white;
+}

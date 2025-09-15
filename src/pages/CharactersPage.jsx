@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function CharactersPage() {
-    const { characters } = useContext(GlobalContext);
+    const { characters, info, page, nextPage, prevPage } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
 
@@ -32,6 +32,18 @@ export default function CharactersPage() {
                     </li>
                 ))}
             </ul>
+
+            <div className="pagination">
+                <button onClick={prevPage} disabled={!info?.prev}>
+                    ◀️ Pagina precedente
+                </button>
+                <span>
+                    Pagina {page} di {info?.pages}
+                </span>
+                <button onClick={nextPage} disabled={!info?.next}>
+                    Pagina successiva ▶️
+                </button>
+            </div>
         </>
     )
 }
