@@ -5,9 +5,10 @@ import useCharacters from '../hooks/useCharacters';
 export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
-    const { characters, info, page, nextPage, prevPage } = useCharacters();
+    const { characters } = useCharacters();
+
     return (
-        <GlobalContext.Provider value={{ characters, info, page, nextPage, prevPage }}>
+        <GlobalContext.Provider value={{ characters }}>
             {children}
         </ GlobalContext.Provider>
     )

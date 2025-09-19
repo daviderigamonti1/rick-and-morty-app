@@ -2,29 +2,29 @@ import { useState, useEffect } from 'react';
 
 export default function useCharacters() {
     const [characters, setCharacters] = useState([]);
-    const [info, setInfo] = useState(null);
-    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        const fetchCharacters = async () => {
+        const fetchAllCharacters = async () => {
             try {
-                const res = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
-                const data = await res.json();
-                setCharacters(data.results);
-                setInfo(data.info);
-                console.log(data);
+                const firstRes = await fetch(`https://rickandmortyapi.com/api/character`);
+                const firstData = await firstRes.json();
+                const totalPages = firstData.info.pages;
+
+                let promises = [];
+                for (let i = 1; i <= totalPages; i++) {
+                    promises.push(fetch(`https://rickandmortyapi.com/api/character?page=${i}`).then(res => res.json()));
+                }
+
+                const allData = await Promise.all(promises);
+                const mergedData = allData.flatMap((data) => data.results);
+                setCharacters(mergedData);
+                return mergedData;
             } catch (err) {
                 console.error(err);
             }
         }
-        fetchCharacters();
-    }, [page]);
+        fetchAllCharacters();
+    }, []);
 
-    return {
-        characters,
-        info,
-        page,
-        nextPage: () => { setPage((p) => p + 1) },
-        prevPage: () => { setPage((p) => p - 1) }
-    };
+    return { characters };
 }
