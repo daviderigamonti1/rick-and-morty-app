@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage";
 import Header from "./components/Header.jsx";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterDetail from "./pages/CharacterDetail.jsx";
+import EpisodePage from "./pages/EpisodePage.jsx";
 
 function App() {
 
@@ -28,6 +29,15 @@ function App() {
               <>
                 <Header />
                 <CharacterDetail />
+              </>
+            }
+          />
+          <Route
+            path="/episode"
+            element={
+              <>
+                <Header />
+                <EpisodePage />
               </>
             }
           />

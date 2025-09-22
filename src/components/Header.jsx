@@ -5,6 +5,7 @@ export default function Header() {
         <header>
             <nav>
                 <NavLink to={"/characters"} className="nav-link">Personaggi</NavLink>
+                <NavLink to={"/episode"} className="nav-link">Episodi</NavLink>
             </nav>
         </header>
     )
