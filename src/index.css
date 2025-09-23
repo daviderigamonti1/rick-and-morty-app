@@ -119,3 +119,16 @@ ul {
   justify-content: center;
   color: white;
 }
+
+/** PAGINA EPISODI **/
+
+.episode-list {
+  color: white;
+  list-style: none;
+}
+
+.episode-list li {
+  margin: 15px;
+  border: 1px solid white;
+  border-radius: 10px;
+}
