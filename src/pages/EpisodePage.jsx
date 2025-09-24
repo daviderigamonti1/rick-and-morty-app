@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function EpisodePage() {
 
     const { episodes, info } = useContext(GlobalContext);
     const [season, setSeason] = useState("1");
+
+    const navigate = useNavigate();
 
 
     if (!episodes || episodes.length === 0) {
@@ -31,6 +34,7 @@ export default function EpisodePage() {
                                 < li key={e.id} >
                                     <h3>{e.episode}</h3>
                                     <p>{e.name}</p>
+                                    <button onClick={() => navigate(`/episode/${e.id}`)}>Vedi dettagli</button>
                                 </li>
                             ))
                     )
@@ -41,6 +45,7 @@ export default function EpisodePage() {
                                 < li key={e.id} >
                                     <h3>{e.episode}</h3>
                                     <p>{e.name}</p>
+                                    <button onClick={() => navigate(`/episode/${e.id}`)}>Vedi dettagli</button>
                                 </li>
                             ))
                     )

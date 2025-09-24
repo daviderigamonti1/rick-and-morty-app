@@ -6,6 +6,7 @@ import Header from "./components/Header.jsx";
 import CharactersPage from "./pages/CharactersPage";
 import CharacterDetail from "./pages/CharacterDetail.jsx";
 import EpisodePage from "./pages/EpisodePage.jsx";
+import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
 
 function App() {
 
@@ -38,6 +39,15 @@ function App() {
               <>
                 <Header />
                 <EpisodePage />
+              </>
+            }
+          />
+          <Route
+            path="/episode/:id"
+            element={
+              <>
+                <Header />
+                <EpisodeDetailsPage />
               </>
             }
           />
