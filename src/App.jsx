@@ -7,6 +7,7 @@ import CharactersPage from "./pages/CharactersPage";
 import CharacterDetail from "./pages/CharacterDetail.jsx";
 import EpisodePage from "./pages/EpisodePage.jsx";
 import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
+import LocationsPage from "./pages/LocationsPage.jsx";
 
 function App() {
 
@@ -48,6 +49,15 @@ function App() {
               <>
                 <Header />
                 <EpisodeDetailsPage />
+              </>
+            }
+          />
+          <Route
+            path="/locations"
+            element={
+              <>
+                <Header />
+                <LocationsPage />
               </>
             }
           />
