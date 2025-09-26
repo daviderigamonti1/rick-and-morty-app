@@ -8,6 +8,7 @@ import CharacterDetail from "./pages/CharacterDetail.jsx";
 import EpisodePage from "./pages/EpisodePage.jsx";
 import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
 import LocationsPage from "./pages/LocationsPage.jsx";
+import LocationDetailsPage from "./pages/LocationDetailsPage.jsx";
 
 function App() {
 
@@ -58,6 +59,15 @@ function App() {
               <>
                 <Header />
                 <LocationsPage />
+              </>
+            }
+          />
+          <Route
+            path="/locations/:id"
+            element={
+              <>
+                <Header />
+                <LocationDetailsPage />
               </>
             }
           />
