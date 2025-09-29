@@ -3,15 +3,21 @@ import { useState, useEffect } from 'react';
 export default function useEpisodes() {
 
     const [episodes, setEpisodes] = useState([]);
-    const [episodesInfo, setEpisodesInfo] = useState({});
 
     useEffect(() => {
         const fetchEpisodes = async () => {
             try {
-                const res = await fetch(`https://rickandmortyapi.com/api/episode`);
-                const data = await res.json();
-                setEpisodes(data.results);
-                setEpisodesInfo(data.info);
+                const firstRes = await fetch(`https://rickandmortyapi.com/api/episode`);
+                const firstData = await firstRes.json();
+                const totalPages = firstData.info.pages;
+
+                let promises = [];
+                for (let i = 1; i <= totalPages; i++) {
+                    promises.push(fetch(`https://rickandmortyapi.com/api/episode?page=${i}`).then(res => res.json()));
+                }
+                const allData = await Promise.all(promises);
+                const mergedData = allData.flatMap((data) => data.results);
+                setEpisodes(mergedData);
             } catch (err) {
                 console.error(err);
             }
@@ -19,5 +25,5 @@ export default function useEpisodes() {
         fetchEpisodes();
     }, []);
 
-    return { episodes, episodesInfo };
+    return { episodes };
 }
