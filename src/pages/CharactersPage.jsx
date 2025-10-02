@@ -7,16 +7,23 @@ export default function CharactersPage() {
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
+    const [status, setStatus] = useState("");
 
     const navigate = useNavigate();
-
-    const filteredCharacters = characters.filter((character) => {
-        return character.name.toLowerCase().includes(searchTitle.toLowerCase());
-    })
 
     if (!characters || characters.length === 0) {
         return <p>No characters found...</p>;
     }
+
+    const filteredByStatus = status
+        ? characters.filter(c => c.status === status)
+        : characters;
+
+    const filteredCharacters = searchTitle
+        ? filteredByStatus.filter((c) =>
+            c.name.toLowerCase().includes(searchTitle.toLowerCase())
+        )
+        : filteredByStatus;
 
     const itemsPerPage = 20;
     const startIndex = (page - 1) * itemsPerPage;
@@ -35,9 +42,26 @@ export default function CharactersPage() {
                     setPage(1);
                 }}
             />
+            <select
+                id="status"
+                onChange={(e) => {
+                    setStatus(e.target.value)
+                    setPage(1);
+                }}
+                value={status}
+            >
+                <option value="">--Seleziona--</option>
+                <option value="Alive">Vivi</option>
+                <option value="Dead">Morti</option>
+                <option value="unknown">Sconosciuti</option>
+            </select>
             <ul>
                 {currentCharacters.map((character) => (
-                    <li key={character.id} className="card" onClick={() => navigate(`/characters/${character.id}`)}>
+                    <li
+                        key={character.id}
+                        className="card"
+                        onClick={() => navigate(`/characters/${character.id}`)}
+                    >
                         <img src={character.image} alt={character.name} />
                         <h3>{character.name}</h3>
                     </li>
