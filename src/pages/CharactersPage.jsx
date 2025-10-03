@@ -9,12 +9,20 @@ export default function CharactersPage() {
     const [page, setPage] = useState(1);
     const [status, setStatus] = useState("");
     const [species, setSpecies] = useState("");
+    const [gender, setGender] = useState("");
 
     const navigate = useNavigate();
 
     if (!characters || characters.length === 0) {
         return <p>No characters found...</p>;
     }
+
+    const uniqueStatus = characters.reduce((acc, character) => {
+        if (!acc.includes(character.status)) {
+            acc.push(character.status);
+        }
+        return acc;
+    }, []);
 
     const uniqueSpecies = characters.reduce((acc, character) => {
         if (!acc.includes(character.species)) {
@@ -23,9 +31,20 @@ export default function CharactersPage() {
         return acc;
     }, []);
 
-    const filteredByStatus = status
-        ? characters.filter(c => c.status === status)
+    const uniqueGender = characters.reduce((acc, character) => {
+        if (!acc.includes(character.gender)) {
+            acc.push(character.gender);
+        }
+        return acc;
+    }, []);
+
+    const filteredByGender = gender
+        ? characters.filter(c => c.gender === gender)
         : characters;
+
+    const filteredByStatus = status
+        ? filteredByGender.filter(c => c.status === status)
+        : filteredByGender;
 
     const filteredBySpecies = species
         ? filteredByStatus.filter(c => c.species === species)
@@ -63,9 +82,11 @@ export default function CharactersPage() {
                 value={status}
             >
                 <option value="">--Seleziona--</option>
-                <option value="Alive">Vivi</option>
-                <option value="Dead">Morti</option>
-                <option value="unknown">Sconosciuti</option>
+                {uniqueStatus.map((status) => (
+                    <option key={status} value={status}>
+                        {status}
+                    </option>
+                ))}
             </select>
             <select
                 id="species"
@@ -79,6 +100,21 @@ export default function CharactersPage() {
                 {uniqueSpecies.map((specie) => (
                     <option key={specie} value={specie}>
                         {specie}
+                    </option>
+                ))}
+            </select>
+            <select
+                id="gender"
+                onChange={(e) => {
+                    setGender(e.target.value)
+                    setPage(1);
+                }}
+                value={gender}
+            >
+                <option value="">--Seleziona--</option>
+                {uniqueGender.map((gender) => (
+                    <option key={gender} value={gender}>
+                        {gender}
                     </option>
                 ))}
             </select>
