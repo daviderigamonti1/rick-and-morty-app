@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
@@ -8,6 +8,7 @@ export default function CharactersPage() {
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
     const [status, setStatus] = useState("");
+    const [species, setSpecies] = useState("");
 
     const navigate = useNavigate();
 
@@ -15,15 +16,26 @@ export default function CharactersPage() {
         return <p>No characters found...</p>;
     }
 
+    const uniqueSpecies = characters.reduce((acc, character) => {
+        if (!acc.includes(character.species)) {
+            acc.push(character.species);
+        }
+        return acc;
+    }, []);
+
     const filteredByStatus = status
         ? characters.filter(c => c.status === status)
         : characters;
 
+    const filteredBySpecies = species
+        ? filteredByStatus.filter(c => c.species === species)
+        : filteredByStatus;
+
     const filteredCharacters = searchTitle
-        ? filteredByStatus.filter((c) =>
+        ? filteredBySpecies.filter((c) =>
             c.name.toLowerCase().includes(searchTitle.toLowerCase())
         )
-        : filteredByStatus;
+        : filteredBySpecies;
 
     const itemsPerPage = 20;
     const startIndex = (page - 1) * itemsPerPage;
@@ -54,6 +66,21 @@ export default function CharactersPage() {
                 <option value="Alive">Vivi</option>
                 <option value="Dead">Morti</option>
                 <option value="unknown">Sconosciuti</option>
+            </select>
+            <select
+                id="species"
+                onChange={(e) => {
+                    setSpecies(e.target.value)
+                    setPage(1);
+                }}
+                value={species}
+            >
+                <option value="">--Seleziona--</option>
+                {uniqueSpecies.map((specie) => (
+                    <option key={specie} value={specie}>
+                        {specie}
+                    </option>
+                ))}
             </select>
             <ul>
                 {currentCharacters.map((character) => (
