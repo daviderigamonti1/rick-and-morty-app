@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 
 export default function useCharacters() {
     const [characters, setCharacters] = useState([]);
+    const [charactersLoading, setCharactersLoading] = useState(true);
 
     useEffect(() => {
         const fetchAllCharacters = async () => {
             try {
+                setCharactersLoading(true);
                 const firstRes = await fetch(`https://rickandmortyapi.com/api/character`);
                 const firstData = await firstRes.json();
                 const totalPages = firstData.info.pages;
@@ -18,13 +20,14 @@ export default function useCharacters() {
                 const allData = await Promise.all(promises);
                 const mergedData = allData.flatMap((data) => data.results);
                 setCharacters(mergedData);
-                return mergedData;
             } catch (err) {
                 console.error(err);
+            } finally {
+                setCharactersLoading(false);
             }
         }
         fetchAllCharacters();
     }, []);
 
-    return { characters };
+    return { characters, charactersLoading };
 }

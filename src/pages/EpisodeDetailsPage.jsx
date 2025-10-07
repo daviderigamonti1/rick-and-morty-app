@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import Loader from "../components/Loader";
+
 export default function EpisodeDetailsPage() {
 
     const { id } = useParams();
     const [episode, setEpisode] = useState();
     const [characters, setCharacters] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchEpisodeDetails() {
             try {
+                setLoading(true);
                 const res = await fetch(`https://rickandmortyapi.com/api/episode/${id}`);
                 const data = await res.json();
                 setEpisode(data);
@@ -20,12 +24,18 @@ export default function EpisodeDetailsPage() {
                 setCharacters(charactersData);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false);
             }
         }
         fetchEpisodeDetails();
     }, [id]);
 
-    if (!episode) {
+    if (loading) {
+        return <Loader />
+    }
+
+    if (!episodeDetails) {
         return <h2>Caricamento episodio...</h2>
     }
 

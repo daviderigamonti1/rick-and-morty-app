@@ -2,13 +2,18 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
+import Loader from "../components/Loader.jsx";
+
 export default function EpisodePage() {
 
-    const { episodes, info } = useContext(GlobalContext);
-    const [season, setSeason] = useState("1");
+    const { episodes, episodesLoading } = useContext(GlobalContext);
+    const [season, setSeason] = useState("S01");
 
     const navigate = useNavigate();
 
+    if (episodesLoading) {
+        return <Loader />
+    }
 
     if (!episodes || episodes.length === 0) {
         return <p>No episodes found...</p>

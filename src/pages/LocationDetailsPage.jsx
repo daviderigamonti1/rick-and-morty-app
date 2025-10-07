@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Loader from "../components/Loader";
+
 export default function LocationDetailsPage() {
 
     const { id } = useParams();
     const [locationDetails, setLocationDetails] = useState();
     const [characters, setCharacters] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchLocationDetails() {
             try {
+                setLoading(true);
                 const res = await fetch(`https://rickandmortyapi.com/api/location/${id}`);
                 const data = await res.json();
                 setLocationDetails(data);
@@ -18,10 +22,16 @@ export default function LocationDetailsPage() {
                 setCharacters(charactersData);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false);
             }
         }
         fetchLocationDetails();
     }, [id]);
+
+    if (loading) {
+        return <Loader />
+    }
 
     if (!locationDetails) {
         return <h2>Caricamento luogo...</h2>

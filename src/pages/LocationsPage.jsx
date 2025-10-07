@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
+import Loader from "../components/Loader.jsx";
+
 export default function LocationsPage() {
-    const { locations } = useContext(GlobalContext);
+    const { locations, locationsLoading } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
@@ -13,6 +15,10 @@ export default function LocationsPage() {
     const filteredLocations = locations.filter((location) => {
         return location.name.toLowerCase().includes(searchTitle.toLowerCase())
     })
+
+    if (locationsLoading) {
+        return <Loader />
+    }
 
     if (!locations || locations.length === 0) {
         return <p>Nessun luogo trovato</p>

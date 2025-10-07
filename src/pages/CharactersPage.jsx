@@ -2,8 +2,10 @@ import { useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
+import Loader from "../components/Loader.jsx";
+
 export default function CharactersPage() {
-    const { characters } = useContext(GlobalContext);
+    const { characters, charactersLoading } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
@@ -12,10 +14,6 @@ export default function CharactersPage() {
     const [gender, setGender] = useState("");
 
     const navigate = useNavigate();
-
-    if (!characters || characters.length === 0) {
-        return <p>No characters found...</p>;
-    }
 
     const uniqueStatus = characters.reduce((acc, character) => {
         if (!acc.includes(character.status)) {
@@ -62,6 +60,14 @@ export default function CharactersPage() {
         startIndex,
         startIndex + itemsPerPage
     );
+
+    if (charactersLoading) {
+        return <Loader />;
+    }
+
+    if (!characters || characters.length === 0) {
+        return <p>No characters found...</p>;
+    }
 
     return (
         <>

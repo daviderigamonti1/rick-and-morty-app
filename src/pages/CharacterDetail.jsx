@@ -1,19 +1,35 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
+import Loader from "../components/Loader";
 
 export default function CharacterDetail() {
 
     const { id } = useParams();
     const [character, setCharacter] = useState();
+    const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchCharacter() {
+            try {
+                setLoading(true);
             const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
             const data = await res.json();
             setCharacter(data);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
         }
         fetchCharacter();
     }, [id]);
+
+    if (loading) {
+        return <Loader />
+    }
 
     if (!character) {
         return <h2>Caricamento personaggio...</h2>

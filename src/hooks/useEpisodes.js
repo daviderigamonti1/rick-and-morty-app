@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 export default function useEpisodes() {
 
     const [episodes, setEpisodes] = useState([]);
+    const [episodesLoading, setEpisodesLoading] = useState(true);
 
     useEffect(() => {
         const fetchEpisodes = async () => {
             try {
+                setEpisodesLoading(true);
                 const firstRes = await fetch(`https://rickandmortyapi.com/api/episode`);
                 const firstData = await firstRes.json();
                 const totalPages = firstData.info.pages;
@@ -20,10 +22,12 @@ export default function useEpisodes() {
                 setEpisodes(mergedData);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setEpisodesLoading(false);
             }
         }
         fetchEpisodes();
     }, []);
 
-    return { episodes };
+    return { episodes, episodesLoading };
 }

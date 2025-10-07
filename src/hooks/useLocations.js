@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 export default function useLocations() {
 
     const [locations, setLocations] = useState([]);
+    const [locationsLoading, setLocationsLoading] = useState(true);
 
     useEffect(() => {
         async function fetchLocations() {
             try {
+                setLocationsLoading(true);
                 const firstRes = await fetch("https://rickandmortyapi.com/api/location");
                 const firstData = await firstRes.json();
                 const totalPages = firstData.info.pages;
@@ -20,9 +22,11 @@ export default function useLocations() {
                 setLocations(mergedData);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLocationsLoading(false);
             }
         }
         fetchLocations();
-    })
-    return { locations };
+    }, []);
+    return { locations, locationsLoading };
 }

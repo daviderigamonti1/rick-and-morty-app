@@ -7,12 +7,12 @@ import useLocations from '../hooks/useLocations';
 export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
-    const { characters } = useCharacters();
-    const { episodes } = useEpisodes();
-    const { locations } = useLocations();
+    const { characters, charactersLoading } = useCharacters();
+    const { episodes, episodesLoading } = useEpisodes();
+    const { locations, locationsLoading } = useLocations();
 
     return (
-        <GlobalContext.Provider value={{ characters, episodes, locations }}>
+        <GlobalContext.Provider value={{ characters, charactersLoading, episodes, episodesLoading, locations, locationsLoading }}>
             {children}
         </ GlobalContext.Provider>
     )
