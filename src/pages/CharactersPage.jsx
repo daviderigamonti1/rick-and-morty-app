@@ -1,11 +1,13 @@
-import { useState, useContext, useMemo } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 import Loader from "../components/Loader.jsx";
 
+import { FaStar, FaRegStar } from "react-icons/fa";
+
 export default function CharactersPage() {
-    const { characters, charactersLoading } = useContext(GlobalContext);
+    const { characters, charactersLoading, isFavorite, toggleFavorite } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
@@ -133,6 +135,12 @@ export default function CharactersPage() {
                     >
                         <img src={character.image} alt={character.name} />
                         <h3>{character.name}</h3>
+                        <button onClick={(e) => {
+                            e.stopPropagation();
+                            toggleFavorite(character);
+                        }}>
+                            {isFavorite(character) ? <FaStar color="gold" /> : <FaRegStar />}
+                        </button>
                     </li>
                 ))}
             </ul>

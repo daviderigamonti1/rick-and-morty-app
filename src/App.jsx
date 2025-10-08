@@ -9,6 +9,7 @@ import EpisodePage from "./pages/EpisodePage.jsx";
 import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
 import LocationsPage from "./pages/LocationsPage.jsx";
 import LocationDetailsPage from "./pages/LocationDetailsPage.jsx";
+import FavoritesPage from "./pages/FavoritesPage.jsx";
 
 function App() {
 
@@ -68,6 +69,15 @@ function App() {
               <>
                 <Header />
                 <LocationDetailsPage />
+              </>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <>
+                <Header />
+                <FavoritesPage />
               </>
             }
           />
