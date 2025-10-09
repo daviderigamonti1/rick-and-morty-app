@@ -8,17 +8,18 @@ export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
 
-    const [favorites, setFavorites] = useState([]);
+    const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+    const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
 
-    const isFavorite = (character) => {
-        return favorites.some(fav => fav.id === character.id);
-    }
+    const isFavorite = (item, favorites) => {
+        return favorites.some(fav => fav.id === item.id);
+    };
 
-    const toggleFavorite = (character) => {
-        if (isFavorite(character)) {
-            setFavorites(favorites.filter(fav => fav.id !== character.id));
+    const toggleFavorite = (item, favorites, setFavorites) => {
+        if (isFavorite(item, favorites)) {
+            setFavorites(favorites.filter(fav => fav.id !== item.id));
         } else {
-            setFavorites([...favorites, character]);
+            setFavorites([...favorites, item]);
         }
     }
 
@@ -27,7 +28,7 @@ export default function GlobalProvider({ children }) {
     const { locations, locationsLoading } = useLocations();
 
     return (
-        <GlobalContext.Provider value={{ characters, charactersLoading, episodes, episodesLoading, locations, locationsLoading, favorites, setFavorites, isFavorite, toggleFavorite }}>
+        <GlobalContext.Provider value={{ characters, charactersLoading, favoriteCharacters, setFavoriteCharacters, episodes, episodesLoading, favoriteEpisodes, setFavoriteEpisodes, locations, locationsLoading, isFavorite, toggleFavorite }}>
             {children}
         </ GlobalContext.Provider>
     )
