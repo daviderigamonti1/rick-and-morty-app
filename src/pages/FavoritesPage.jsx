@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 export default function favoritesPage() {
-    const { favoriteCharacters, setFavoriteCharacters, favoriteEpisodes, setFavoriteEpisodes, isFavorite, toggleFavorite } = useContext(GlobalContext);
+    const { favoriteCharacters, setFavoriteCharacters, favoriteEpisodes, setFavoriteEpisodes, favoriteLocations, setFavoriteLocations, isFavorite, toggleFavorite } = useContext(GlobalContext);
 
     if (favoriteCharacters.length === 0) {
         return <p>Nessun personaggio preferito...</p>
@@ -48,6 +48,19 @@ export default function favoritesPage() {
                 ))}
             </ul>
 
+            {/* LUOGHI */}
+            <h1>Luoghi preferiti</h1>
+            <ul className="locations-list">
+                {favoriteLocations.map((l) => (
+                    <li key={l.id}>
+                        <p>{l.name}</p>
+                        <button onClick={() => navigate(`/locations/${l.id}`)}>Vedi dettagli</button>
+                        <button onClick={() => toggleFavorite(l, favoriteLocations, setFavoriteLocations)}>
+                            {isFavorite(l, favoriteLocations) ? <FaStar color="gold" /> : <FaRegStar />}
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </>
     )
 }

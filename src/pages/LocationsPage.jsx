@@ -4,8 +4,10 @@ import { GlobalContext } from "../context/GlobalContext";
 
 import Loader from "../components/Loader.jsx";
 
+import { FaStar, FaRegStar } from "react-icons/fa";
+
 export default function LocationsPage() {
-    const { locations, locationsLoading } = useContext(GlobalContext);
+    const { locations, locationsLoading, favoriteLocations, setFavoriteLocations, isFavorite, toggleFavorite } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
@@ -47,6 +49,9 @@ export default function LocationsPage() {
                     <li key={l.id}>
                         <p>{l.name}</p>
                         <button onClick={() => navigate(`/locations/${l.id}`)}>Vedi dettagli</button>
+                        <button onClick={() => toggleFavorite(l, favoriteLocations, setFavoriteLocations)}>
+                            {isFavorite(l, favoriteLocations) ? <FaStar color="gold" /> : <FaRegStar />}
+                        </button>
                     </li>
                 ))}
             </ul>

@@ -10,6 +10,7 @@ export default function GlobalProvider({ children }) {
 
     const [favoriteCharacters, setFavoriteCharacters] = useState([]);
     const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
+    const [favoriteLocations, setFavoriteLocations] = useState([]);
 
     const isFavorite = (item, favorites) => {
         return favorites.some(fav => fav.id === item.id);
@@ -28,7 +29,7 @@ export default function GlobalProvider({ children }) {
     const { locations, locationsLoading } = useLocations();
 
     return (
-        <GlobalContext.Provider value={{ characters, charactersLoading, favoriteCharacters, setFavoriteCharacters, episodes, episodesLoading, favoriteEpisodes, setFavoriteEpisodes, locations, locationsLoading, isFavorite, toggleFavorite }}>
+        <GlobalContext.Provider value={{ characters, charactersLoading, favoriteCharacters, setFavoriteCharacters, episodes, episodesLoading, favoriteEpisodes, setFavoriteEpisodes, locations, locationsLoading, favoriteLocations, setFavoriteLocations, isFavorite, toggleFavorite }}>
             {children}
         </ GlobalContext.Provider>
     )
