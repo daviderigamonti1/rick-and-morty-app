@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 import useCharacters from '../hooks/useCharacters';
 import useEpisodes from '../hooks/useEpisodes';
@@ -6,11 +6,27 @@ import useLocations from '../hooks/useLocations';
 
 export const GlobalContext = createContext();
 
+const savedCharacters = localStorage.getItem('favoriteCharacters');
+const savedEpisodes = localStorage.getItem('favoriteEpisodes');
+const savedLocations = localStorage.getItem('favoriteLocations');
+
 export default function GlobalProvider({ children }) {
 
-    const [favoriteCharacters, setFavoriteCharacters] = useState([]);
-    const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
-    const [favoriteLocations, setFavoriteLocations] = useState([]);
+    const [favoriteCharacters, setFavoriteCharacters] = useState(savedCharacters ? JSON.parse(savedCharacters) : []);
+    const [favoriteEpisodes, setFavoriteEpisodes] = useState(savedEpisodes ? JSON.parse(savedEpisodes) : []);
+    const [favoriteLocations, setFavoriteLocations] = useState(savedLocations ? JSON.parse(savedLocations) : []);
+
+    useEffect(() => {
+        localStorage.setItem('favoriteCharacters', JSON.stringify(favoriteCharacters));
+    }, [favoriteCharacters]);
+
+    useEffect(() => {
+        localStorage.setItem('favoriteEpisodes', JSON.stringify(favoriteEpisodes));
+    }, [favoriteEpisodes]);
+
+    useEffect(() => {
+        localStorage.setItem('favoriteLocations', JSON.stringify(favoriteLocations));
+    }, [favoriteLocations]);
 
     const isFavorite = (item, favorites) => {
         return favorites.some(fav => fav.id === item.id);

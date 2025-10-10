@@ -7,7 +7,7 @@ import Loader from "../components/Loader.jsx";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 export default function CharactersPage() {
-    const { characters, charactersLoading, isFavorite, toggleFavorite } = useContext(GlobalContext);
+    const { characters, charactersLoading, isFavorite, toggleFavorite, favoriteCharacters, setFavoriteCharacters } = useContext(GlobalContext);
 
     const [searchTitle, setSearchTitle] = useState("");
     const [page, setPage] = useState(1);
@@ -137,9 +137,9 @@ export default function CharactersPage() {
                         <h3>{character.name}</h3>
                         <button onClick={(e) => {
                             e.stopPropagation();
-                            toggleFavorite(character);
+                            toggleFavorite(character, favoriteCharacters, setFavoriteCharacters);
                         }}>
-                            {isFavorite(character) ? <FaStar color="gold" /> : <FaRegStar />}
+                            {isFavorite(character, favoriteCharacters) ? <FaStar color="gold" /> : <FaRegStar />}
                         </button>
                     </li>
                 ))}
