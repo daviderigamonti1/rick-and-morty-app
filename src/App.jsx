@@ -10,6 +10,7 @@ import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
 import LocationsPage from "./pages/LocationsPage.jsx";
 import LocationDetailsPage from "./pages/LocationDetailsPage.jsx";
 import FavoritesPage from "./pages/FavoritesPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 function App() {
 
@@ -81,6 +82,7 @@ function App() {
               </>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>
