@@ -11,6 +11,7 @@ import LocationsPage from "./pages/LocationsPage.jsx";
 import LocationDetailsPage from "./pages/LocationDetailsPage.jsx";
 import FavoritesPage from "./pages/FavoritesPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import EpisodeTimelinePage from "./pages/EpisodeTimelinePage.jsx";
 
 function App() {
 
@@ -79,6 +80,15 @@ function App() {
               <>
                 <Header />
                 <FavoritesPage />
+              </>
+            }
+          />
+          <Route
+            path="/timeline"
+            element={
+              <>
+                <Header />
+                <EpisodeTimelinePage />
               </>
             }
           />

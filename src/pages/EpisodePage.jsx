@@ -47,8 +47,12 @@ export default function EpisodePage() {
                                 {isFavorite(e, favoriteEpisodes) ? <FaStar color="gold" /> : <FaRegStar />}
                             </button>
                         </li>
-                    ))}
+                    ))
+                }
             </ul>
+            <button onClick={() => navigate("/timeline")}>
+                Vedi timeline
+            </button >
         </>
     )
 }
