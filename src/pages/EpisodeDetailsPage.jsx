@@ -43,8 +43,11 @@ export default function EpisodeDetailsPage() {
         <>
             <h2>Dettagli episodio</h2>
             <div className="episode-details">
-                <p>Nome: {episode.name}</p>
-                <p>Data uscita: {episode.air_date}</p>
+                <div className="episode-image">
+                    <img src={`/episodes/${id}.webp`} alt={episodeDetails.name} />
+                </div>
+                <p>Nome: {episodeDetails.name}</p>
+                <p>Data uscita: {episodeDetails.air_date}</p>
                 <p>Personaggi:</p>
                 <ul>
                     {characters.map((c) => (

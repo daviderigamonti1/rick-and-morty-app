@@ -39,7 +39,10 @@ export default function EpisodePage() {
                 {episodes
                     .filter(e => e.episode.startsWith(season))
                     .map((e) => (
-                        < li key={e.id} >
+                        < li key={e.id} className="episode-card">
+                            <div className="episode-image">
+                                <img src={`./episodes/${e.id}.webp`} alt={e.name} />
+                            </div>
                             <h3>{e.episode}</h3>
                             <p>{e.name}</p>
                             <button onClick={() => navigate(`/episode/${e.id}`)}>Vedi dettagli</button>
