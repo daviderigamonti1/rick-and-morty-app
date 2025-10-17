@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import Loader from "../components/Loader";
+import BackButton from "../components/BackButton";
 
 export default function EpisodeDetailsPage() {
 
@@ -57,7 +58,7 @@ export default function EpisodeDetailsPage() {
                         </li>
                     ))}
                 </ul>
-                <button onClick={() => navigate(-1)}>Torna indietro</button>
+                <BackButton />
             </div>
         </>
     )

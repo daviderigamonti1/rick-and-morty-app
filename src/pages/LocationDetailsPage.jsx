@@ -52,6 +52,7 @@ export default function LocationDetailsPage() {
                         </li>
                     ))}
                 </ul>
+                <BackButton />
             </div>
         </>
     )

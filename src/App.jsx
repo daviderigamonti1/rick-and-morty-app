@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Header from "./components/Header.jsx";
 import CharactersPage from "./pages/CharactersPage";
-import CharacterDetail from "./pages/CharacterDetail.jsx";
+import CharacterDetailsPage from "./pages/CharacterDetailsPage.jsx";
 import EpisodePage from "./pages/EpisodePage.jsx";
 import EpisodeDetailsPage from "./pages/EpisodeDetailsPage.jsx";
 import LocationsPage from "./pages/LocationsPage.jsx";
@@ -34,7 +34,7 @@ function App() {
             element={
               <>
                 <Header />
-                <CharacterDetail />
+                <CharacterDetailsPage />
               </>
             }
           />
