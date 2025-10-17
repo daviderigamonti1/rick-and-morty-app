@@ -5,6 +5,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import Loader from "../components/Loader.jsx";
 
 import { FaStar, FaRegStar } from "react-icons/fa";
+import Pagination from "../components/Pagination.jsx";
 
 export default function CharactersPage() {
     const { characters, charactersLoading, isFavorite, toggleFavorite, favoriteCharacters, setFavoriteCharacters } = useContext(GlobalContext);
@@ -72,7 +73,7 @@ export default function CharactersPage() {
     }
 
     return (
-        <>
+        <div className="characters-page">
             <input
                 type="text"
                 placeholder="Cerca un personaggio..."
@@ -126,11 +127,11 @@ export default function CharactersPage() {
                     </option>
                 ))}
             </select>
-            <ul>
+            <ul className="characters-list">
                 {currentCharacters.map((character) => (
                     <li
                         key={character.id}
-                        className="card"
+                        className="character-card"
                         onClick={() => navigate(`/characters/${character.id}`)}
                     >
                         <img src={character.image} alt={character.name} />
@@ -144,18 +145,11 @@ export default function CharactersPage() {
                     </li>
                 ))}
             </ul>
-
-            <div className="pagination">
-                <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-                    ◀️ Pagina precedente
-                </button>
-                <span>
-                    Pagina {page} di {Math.ceil(filteredCharacters.length / itemsPerPage)}
-                </span>
-                <button onClick={() => setPage(page + 1)} disabled={page >= Math.ceil(filteredCharacters.length / itemsPerPage)}>
-                    Pagina successiva ▶️
-                </button>
-            </div>
-        </>
+            <Pagination
+                filteredItems={filteredCharacters}
+                page={page}
+                setPage={setPage}
+            />
+        </div>
     )
 }

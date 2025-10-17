@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 import Loader from "../components/Loader.jsx";
+import Pagination from "../components/Pagination.jsx";
 
 import { FaStar, FaRegStar } from "react-icons/fa";
 
@@ -55,16 +56,11 @@ export default function LocationsPage() {
                     </li>
                 ))}
             </ul>
-            <div className="pagination">
-                <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-                    ◀️ Pagina precedente
-                </button>
-                <span>
-                    Pagina {page} di {Math.ceil(filteredLocations.length / itemsPerPage)}
-                </span>
-                <button onClick={() => setPage(page + 1)} disabled={page >= Math.ceil(filteredLocations.length / itemsPerPage)}>
-                    Pagina successiva ▶️
-                </button>
+            <Pagination
+                filteredItems={filteredLocations}
+                page={page}
+                setPage={setPage}
+            />
             </div>
         </>
     )
