@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Loader from "../components/Loader";
+import CharacterCard from "../components/CharacterCard";
 
 export default function LocationDetailsPage() {
 
@@ -48,13 +49,12 @@ export default function LocationDetailsPage() {
                     <p>Questa location è deserta... forse Rick l'ha distrutta</p>
                 ) : (<ul>
                     {characters.map((c) => (
-                        <li key={c.id} className="card" onClick={() => navigate(`/characters/${c.id}`)}>
-                            <img src={c.image} alt={c.name} />
-                            <p>{c.name}</p>
-                        </li>
+                        <CharacterCard
+                            key={c.id}
+                            character={c}
+                        />
                     ))}
-                </ul>
-                <BackButton />
+                </ul>)}
             </div>
         </>
     )

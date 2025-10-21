@@ -7,7 +7,7 @@ import BackButton from "../components/BackButton";
 export default function EpisodeDetailsPage() {
 
     const { id } = useParams();
-    const [episode, setEpisode] = useState();
+    const [episodeDetails, setEpisodeDetails] = useState();
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ export default function EpisodeDetailsPage() {
                 setLoading(true);
                 const res = await fetch(`https://rickandmortyapi.com/api/episode/${id}`);
                 const data = await res.json();
-                setEpisode(data);
+                setEpisodeDetails(data);
                 const characterResponses = data.characters.map((url) => fetch(url).then(res => res.json()));
                 const charactersData = await Promise.all(characterResponses);
                 setCharacters(charactersData);
@@ -52,10 +52,10 @@ export default function EpisodeDetailsPage() {
                 <p>Personaggi presenti:</p>
                 <ul>
                     {characters.map((c) => (
-                        <li key={c.id} className="card">
-                            <img src={c.image} alt={c.name} />
-                            <p>{c.name}</p>
-                        </li>
+                        <CharacterCard
+                            key={c.id}
+                            character={c}
+                        />
                     ))}
                 </ul>
                 <BackButton />
