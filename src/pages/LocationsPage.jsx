@@ -24,7 +24,7 @@ export default function LocationsPage() {
     }
 
     if (!locations || locations.length === 0) {
-        return <p>Nessun luogo trovato</p>
+        return <p>Morty... non ci sono luoghi qui, forse sono finiti in un altro dimensione!</p>
     }
 
     const itemsPerPage = 20;
@@ -35,7 +35,7 @@ export default function LocationsPage() {
     );
 
     return (
-        <>
+        <div className="locations-page">
             <h2>Lista dei luoghi</h2>
             <input
                 type="text"
@@ -62,6 +62,5 @@ export default function LocationsPage() {
                 setPage={setPage}
             />
             </div>
-        </>
     )
 }

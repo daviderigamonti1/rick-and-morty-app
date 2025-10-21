@@ -7,7 +7,7 @@ export default function NotFoundPage() {
             <h1>404 - Questa dimensione non esiste</h1>
             <p>
                 Sembra che tu abbia preso una strada interdimensionale sbagliata...
-                Forse Rick ha cancellato questa timeline 🤯
+                Forse Rick ha cancellato questa timeline
             </p>
             <BackButton />
         </div>

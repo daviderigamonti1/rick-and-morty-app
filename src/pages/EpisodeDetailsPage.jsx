@@ -37,19 +37,19 @@ export default function EpisodeDetailsPage() {
     }
 
     if (!episodeDetails) {
-        return <h2>Caricamento episodio...</h2>
+        return <h2>Morty... questo episodio è sparito in un altro universo!</h2>
     }
 
     return (
         <>
-            <h2>Dettagli episodio</h2>
+            <h2>{episodeDetails.episode} — {episodeDetails.name}</h2>
             <div className="episode-details">
                 <div className="episode-image">
                     <img src={`/episodes/${id}.webp`} alt={episodeDetails.name} />
                 </div>
                 <p>Nome: {episodeDetails.name}</p>
-                <p>Data uscita: {episodeDetails.air_date}</p>
-                <p>Personaggi:</p>
+                <p>Uscita: {episodeDetails.air_date}</p>
+                <p>Personaggi presenti:</p>
                 <ul>
                     {characters.map((c) => (
                         <li key={c.id} className="card">

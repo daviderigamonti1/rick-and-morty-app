@@ -18,7 +18,7 @@ export default function EpisodePage() {
     }
 
     if (!episodes || episodes.length === 0) {
-        return <p>No episodes found...</p>
+        return <p>Oh no! Gli episodi sono evaporati nel vuoto cosmico!</p>
     }
 
     return (

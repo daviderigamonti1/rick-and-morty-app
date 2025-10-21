@@ -34,17 +34,19 @@ export default function LocationDetailsPage() {
     }
 
     if (!locationDetails) {
-        return <h2>Caricamento luogo...</h2>
+        return <h2>Morty, sembra che Rick abbia cancellato questo posto… ops!</h2>
     }
 
     return (
         <>
-            <h2>Dettagli {locationDetails.name}</h2>
+            <h2>{locationDetails.name} <span>({locationDetails.type})</span></h2>
             <div className="location-details">
                 <p>Tipo: {locationDetails.type}</p>
                 <p>Dimensione: {locationDetails.dimension}</p>
                 <p>Residenti:</p>
-                <ul>
+                {characters.length === 0 ? (
+                    <p>Questa location è deserta... forse Rick l'ha distrutta</p>
+                ) : (<ul>
                     {characters.map((c) => (
                         <li key={c.id} className="card" onClick={() => navigate(`/characters/${c.id}`)}>
                             <img src={c.image} alt={c.name} />

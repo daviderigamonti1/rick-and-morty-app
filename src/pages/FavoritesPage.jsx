@@ -3,18 +3,23 @@ import { GlobalContext } from "../context/GlobalContext";
 
 import { FaStar, FaRegStar } from "react-icons/fa";
 
-export default function favoritesPage() {
+export default function FavoritesPage() {
     const { favoriteCharacters, setFavoriteCharacters, favoriteEpisodes, setFavoriteEpisodes, favoriteLocations, setFavoriteLocations, isFavorite, toggleFavorite } = useContext(GlobalContext);
 
-    if (favoriteCharacters.length === 0) {
-        return <p>Nessun personaggio preferito...</p>
+    const navigate = useNavigate();
+
+    if (favoriteCharacters.length === 0 && favoriteEpisodes.length === 0 && favoriteLocations.length === 0) {
+        return <p>Nessun preferito per ora... Morty, trova qualcosa che ti piaccia!</p>
     }
 
     return (
-        <>
+        <div className="favorites-page">
+
             {/* PERSONAGGI */}
+            <section className="favorites-section">
             <h1>Personaggi preferiti</h1>
-            <ul>
+                {favoriteCharacters.length === 0 ? <p>Morty… non hai ancora salvato personaggi, sembra che siano fuggiti nel multiverso!</p> : (
+                    <ul className="favorites-character-list">
                 {favoriteCharacters.map((character) => (
                     <li
                         key={character.id}
@@ -32,10 +37,14 @@ export default function favoritesPage() {
                     </li>
                 ))}
             </ul>
+                )}
+            </section>
 
             {/* EPISODI */}
+            <section className="favorites-section">
             <h1>Episodi preferiti</h1>
-            <ul className="episode-list">
+                {favoriteEpisodes.length === 0 ? <p>Whoa, Morty… sembra che non ci siano episodi salvati nel tuo multiverso personale!</p> : (
+                    <ul className="favorites-episode-list">
                 {favoriteEpisodes.map((e) => (
                     < li key={e.id} >
                         <h3>{e.episode}</h3>
@@ -47,10 +56,14 @@ export default function favoritesPage() {
                     </li>
                 ))}
             </ul>
+                )}
+            </section>
 
             {/* LUOGHI */}
+            <section className="favorites-section">
             <h1>Luoghi preferiti</h1>
-            <ul className="locations-list">
+                {favoriteLocations.length === 0 ? <p>Morty, sembra che il tuo multiverso non abbia ancora posti preferiti… tutto deserto!</p> : (
+                    <ul className="favorites-location-list">
                 {favoriteLocations.map((l) => (
                     <li key={l.id}>
                         <p>{l.name}</p>
@@ -61,6 +74,8 @@ export default function favoritesPage() {
                     </li>
                 ))}
             </ul>
-        </>
+                )}
+            </section>
+        </div>
     )
 }

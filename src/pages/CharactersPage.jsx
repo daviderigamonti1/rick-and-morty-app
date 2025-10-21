@@ -69,7 +69,7 @@ export default function CharactersPage() {
     }
 
     if (!characters || characters.length === 0) {
-        return <p>No characters found...</p>;
+        return <p>Wubba lubba dub dub! Nessun personaggio qui, Morty...</p>;
     }
 
     return (

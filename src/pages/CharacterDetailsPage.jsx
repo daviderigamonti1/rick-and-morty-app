@@ -31,7 +31,7 @@ export default function CharacterDetailsPage() {
     }
 
     if (!character) {
-        return <h2>Caricamento personaggio...</h2>
+        return <h2>Morty... questo personaggio è sparito nel multiverso!</h2>
     }
 
     return (
@@ -39,9 +39,9 @@ export default function CharacterDetailsPage() {
             <div>
                 <img src={character.image} alt={character.name} />
                 <h2>{character.name}</h2>
-                <p className="character-content">🧬 Specie: <strong>{character.species}</strong></p>
-                <p className="character-content">⚖️ Stato: <strong>{character.status}</strong></p>
-                <p className="character-content">🚻 Genere: <strong>{character.gender}</strong></p>
+                <p className="character-content">Specie: <strong>{character.species}</strong></p>
+                <p className="character-content">Stato: <strong>{character.status}</strong></p>
+                <p className="character-content">Genere: <strong>{character.gender}</strong></p>
                 <p className="character-content">Origine: <strong>{character.origin.name}</strong></p>
                 <p className="character-content">Ultima posizione conosciuta: <strong>{character.location.name}</strong></p>
             </div>
