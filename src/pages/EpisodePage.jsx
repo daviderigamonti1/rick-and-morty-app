@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 import Loader from "../components/Loader.jsx";
-
-import { FaStar, FaRegStar } from "react-icons/fa";
+import ItemCard from "../components/ItemCard.jsx";
 
 export default function EpisodePage() {
 
-    const { episodes, episodesLoading, favoriteEpisodes, setFavoriteEpisodes, isFavorite, toggleFavorite } = useContext(GlobalContext);
+    const { episodes, episodesLoading, favoriteEpisodes, setFavoriteEpisodes } = useContext(GlobalContext);
     const [season, setSeason] = useState("S01");
 
     const navigate = useNavigate();
@@ -22,8 +21,10 @@ export default function EpisodePage() {
     }
 
     return (
-        <>
-            <h1>Lista episodi</h1>
+        <div className="episode-page">
+            <h2>Lista episodi</h2>
+
+            <div className="episode-controls">
             <select
                 id="season"
                 onChange={(e) => setSeason(e.target.value)}
@@ -36,26 +37,22 @@ export default function EpisodePage() {
                 <option value="S05">Stagione 5</option>
             </select>
             <ul className="episode-list">
-                {episodes
+                {filteredEpisodes
                     .filter(e => e.episode.startsWith(season))
                     .map((e) => (
-                        < li key={e.id} className="episode-card">
-                            <div className="episode-image">
-                                <img src={`./episodes/${e.id}.webp`} alt={e.name} />
-                            </div>
-                            <h3>{e.episode}</h3>
-                            <p>{e.name}</p>
-                            <button onClick={() => navigate(`/episode/${e.id}`)}>Vedi dettagli</button>
-                            <button onClick={() => toggleFavorite(e, favoriteEpisodes, setFavoriteEpisodes)}>
-                                {isFavorite(e, favoriteEpisodes) ? <FaStar color="gold" /> : <FaRegStar />}
-                            </button>
-                        </li>
+                        <ItemCard
+                            key={e.id}
+                            item={e}
+                            favoriteItems={favoriteEpisodes}
+                            setFavoriteItems={setFavoriteEpisodes}
+                            mediaType={"episodes"}
+                        />
                     ))
                 }
             </ul>
             <button onClick={() => navigate("/timeline")}>
                 Vedi timeline
             </button >
-        </>
+        </div>
     )
 }
