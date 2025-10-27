@@ -25,8 +25,8 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/characters" element={<CharactersPage />} />
             <Route path="/characters/:id" element={<CharacterDetailsPage />} />
-            <Route path="/episode" element={<EpisodePage />} />
-            <Route path="/episode/:id" element={<EpisodeDetailsPage />} />
+            <Route path="/episodes" element={<EpisodePage />} />
+            <Route path="/episodes/:id" element={<EpisodeDetailsPage />} />
             <Route path="/locations" element={<LocationsPage />} />
             <Route path="/locations/:id" element={<LocationDetailsPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />

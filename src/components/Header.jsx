@@ -6,7 +6,7 @@ export default function Header() {
             <nav>
                 <NavLink to={"/"}><img src="/rick&morty-logo.jpg" alt="logo" /></NavLink>
                 <NavLink to={"/characters"} className="nav-link">Personaggi</NavLink>
-                <NavLink to={"/episode"} className="nav-link">Episodi</NavLink>
+                <NavLink to={"/episodes"} className="nav-link">Episodi</NavLink>
                 <NavLink to={"/locations"} className="nav-link">Luoghi</NavLink>
                 <NavLink to={"/favorites"} className="nav-link">Preferiti</NavLink>
             </nav>

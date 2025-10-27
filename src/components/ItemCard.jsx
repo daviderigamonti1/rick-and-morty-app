@@ -1,33 +1,61 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
+import { FaStar, FaRegStar, FaInfoCircle, FaGlobe, FaUserAstronaut, FaFilm } from "react-icons/fa";
 
-import { FaStar, FaRegStar } from "react-icons/fa";
-
-export default function ItemCard({ item, favoriteItems, setFavoriteItems, mediaType }) {
-
+export default function ItemCard({ item, favoriteItems, setFavoriteItems, mediaType, favoriteView = false }) {
     const { isFavorite, toggleFavorite } = useContext(GlobalContext);
 
     const navigate = useNavigate();
 
+    const getTypeIcon = () => {
+        switch (mediaType) {
+            case "characters":
+                return <FaUserAstronaut color="#00ff91" />;
+            case "episodes":
+                return <FaFilm color="#00aaff" />;
+            case "locations":
+                return <FaGlobe color="#b56dff" />;
+            default:
+                return null;
+        }
+    };
+
+    const itemImage = mediaType === "characters"
+        ? item.image
+        : `./${mediaType}/${item.id}.webp`;
+
     return (
-        <li className="item-card">
+        <li className={`item-card ${mediaType}`}
+            onClick={() => favoriteView ? navigate(`/${mediaType}/${item.id}`) : null}>
+
             <div className="item-image">
-                <img src={`/${mediaType}/${item.id}.webp`} alt={item.name} />
+                <img src={itemImage} alt={item.name} />
             </div>
-            {item.episode && <h3>{item.episode}</h3>}
-            <p>{item.name}</p>
-            <div className="item-actions">
-                <button onClick={() => navigate(`/episode/${item.id}`)}>Vedi dettagli</button>
+
+            <div className="item-content">
+                <div className="item-header">
+                    {getTypeIcon()}
+                    <h3>{item.name}</h3>
+                </div>
+
+                {item.episode && <p className="item-sub">{item.episode}</p>}
+            </div>
+
+            <div className="item-actions" onClick={(e) => e.stopPropagation()}>
+                {!favoriteView && (
+                    <button className="item-details-btn" onClick={() => navigate(`/${mediaType}/${item.id}`)}>
+                        <FaInfoCircle /> Scopri di più
+                    </button>
+                )}
+
                 <button
                     className="item-favorite-btn"
-                    onClick={(ev) => {
-                        ev.stopPropagation();
-                        toggleFavorite(item, favoriteItems, setFavoriteItems)
-                    }}>
+                    onClick={() => toggleFavorite(item, favoriteItems, setFavoriteItems)}
+                >
                     {isFavorite(item, favoriteItems) ? <FaStar color="gold" /> : <FaRegStar />}
                 </button>
             </div>
-        </li>
-    )
+        </li >
+    );
 }
