@@ -2,6 +2,8 @@ import { Chrono } from "react-chrono";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
+import { episodeDescriptions } from "../data/episodeDescriptions";
+
 export default function EpisodeTimeline() {
     const { episodes } = useContext(GlobalContext);
 
@@ -9,6 +11,7 @@ export default function EpisodeTimeline() {
         title: e.episode,
         cardTitle: e.name,
         cardSubtitle: e.air_date,
+        cardDetailedText: episodeDescriptions[e.episode] || "Trama non disponibile…",
         media: {
             type: "IMAGE",
             source: {
@@ -19,20 +22,21 @@ export default function EpisodeTimeline() {
 
     return (
         <div className="timeline-page">
-            <h1 className="timeline-title">📺 Timeline degli Episodi</h1>
             <div className="timeline-container">
+                <h1 className="timeline-title">TIMELINE EPISODI</h1>
                 <Chrono
                     items={items}
                     mode="VERTICAL_ALTERNATING"
                     cardHeight={220}
                     hideControls={false}
                     theme={{
-                        primary: "#22c55e", // verde brillante
-                        secondary: "#1e293b", // blu notte
-                        cardBgColor: "#0f172a", // scuro elegante
+                        primary: "#22c55e",
+                        secondary: "#1e293b",
+                        cardBgColor: "#0f172a",
                         titleColor: "#22c55e",
                         cardTitleColor: "#22c55e",
                         cardSubtitleColor: "#94a3b8",
+                        cardDetailsColor: "#cbd5e1",
                     }}
                 />
             </div>
