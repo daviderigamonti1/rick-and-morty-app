@@ -37,15 +37,15 @@ export default function CharacterDetailsPage() {
     return (
         <div className="character-detail">
             <div>
-                <img src={character.image} alt={character.name} />
                 <h2>{character.name}</h2>
+                <img src={character.image} alt={character.name} />
                 <p className="character-content">Specie: <strong>{character.species}</strong></p>
                 <p className="character-content">Stato: <strong>{character.status}</strong></p>
                 <p className="character-content">Genere: <strong>{character.gender}</strong></p>
                 <p className="character-content">Origine: <strong>{character.origin.name}</strong></p>
                 <p className="character-content">Ultima posizione conosciuta: <strong>{character.location.name}</strong></p>
             </div>
-            <BackButton />
+            <BackButton to={"/characters"} />
         </div>
     )
 }

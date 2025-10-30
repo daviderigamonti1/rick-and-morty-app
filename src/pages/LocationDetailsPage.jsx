@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Loader from "../components/Loader";
 import CharacterCard from "../components/CharacterCard";
+import BackButton from "../components/BackButton";
 
 export default function LocationDetailsPage() {
 
@@ -40,8 +41,8 @@ export default function LocationDetailsPage() {
 
     return (
         <>
-            <h2>{locationDetails.name} <span>({locationDetails.type})</span></h2>
             <div className="location-details">
+                <h2>{locationDetails.name}</h2>
                 <p>Tipo: {locationDetails.type}</p>
                 <p>Dimensione: {locationDetails.dimension}</p>
                 <p>Residenti:</p>
@@ -55,6 +56,7 @@ export default function LocationDetailsPage() {
                         />
                     ))}
                 </ul>)}
+                <BackButton to={"/locations"} />
             </div>
         </>
     )

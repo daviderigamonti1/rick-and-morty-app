@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import Loader from "../components/Loader";
 import BackButton from "../components/BackButton";
+import CharacterCard from "../components/CharacterCard";
 
 export default function EpisodeDetailsPage() {
 
@@ -10,8 +11,6 @@ export default function EpisodeDetailsPage() {
     const [episodeDetails, setEpisodeDetails] = useState();
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchEpisodeDetails() {
@@ -42,12 +41,12 @@ export default function EpisodeDetailsPage() {
 
     return (
         <>
-            <h2>{episodeDetails.episode} — {episodeDetails.name}</h2>
             <div className="episode-details">
+                <h2>{episodeDetails.name}</h2>
                 <div className="episode-image">
                     <img src={`/episodes/${id}.webp`} alt={episodeDetails.name} />
                 </div>
-                <p>Nome: {episodeDetails.name}</p>
+                <p>Episodio: {episodeDetails.episode}</p>
                 <p>Uscita: {episodeDetails.air_date}</p>
                 <p>Personaggi presenti:</p>
                 <ul>
@@ -58,7 +57,7 @@ export default function EpisodeDetailsPage() {
                         />
                     ))}
                 </ul>
-                <BackButton />
+                <BackButton to={"/episode"} />
             </div>
         </>
     )

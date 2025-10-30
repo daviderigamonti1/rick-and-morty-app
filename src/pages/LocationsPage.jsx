@@ -32,7 +32,7 @@ export default function LocationsPage() {
 
     return (
         <div className="locations-page">
-            <h2>Lista dei luoghi</h2>
+            <h2>LUOGHI</h2>
             <input
                 type="text"
                 placeholder="Cerca un luogo..."

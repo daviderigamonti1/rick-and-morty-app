@@ -22,7 +22,7 @@ export default function EpisodePage() {
 
     return (
         <div className="episode-page">
-            <h2>Lista episodi</h2>
+            <h2>EPISODI</h2>
 
             <div className="episode-controls">
             <select

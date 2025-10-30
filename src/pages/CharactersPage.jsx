@@ -74,6 +74,7 @@ export default function CharactersPage() {
 
     return (
         <div className="characters-page">
+            <h2>PERSONAGGI</h2>
             <input
                 type="text"
                 placeholder="Cerca un personaggio..."

@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { FaArrowDown } from "react-icons/fa";
 
 export default function Header() {
     return (

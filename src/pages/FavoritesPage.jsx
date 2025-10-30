@@ -15,7 +15,7 @@ export default function FavoritesPage() {
 
             {/* PERSONAGGI */}
             <section className="favorites-section">
-                <h1>Personaggi preferiti</h1>
+                <h2>PERSONAGGI PREFERITI</h2>
                 {favoriteCharacters.length === 0 ? <p>Morty… non hai ancora salvato personaggi, sembra che siano fuggiti nel multiverso!</p> : (
                     <ul className="favorites-character-list">
                         {favoriteCharacters.map((c) => (
@@ -34,7 +34,7 @@ export default function FavoritesPage() {
 
             {/* EPISODI */}
             <section className="favorites-section">
-                <h1>Episodi preferiti</h1>
+                <h2>EPISODI PREFERITI</h2>
                 {favoriteEpisodes.length === 0 ? <p>Whoa, Morty… sembra che non ci siano episodi salvati nel tuo multiverso personale!</p> : (
                     <ul className="favorites-episode-list">
                         {favoriteEpisodes.map((e) => (
@@ -53,7 +53,7 @@ export default function FavoritesPage() {
 
             {/* LUOGHI */}
             <section className="favorites-section">
-                <h1>Luoghi preferiti</h1>
+                <h2>LUOGHI PREFERITI</h2>
                 {favoriteLocations.length === 0 ? <p>Morty, sembra che il tuo multiverso non abbia ancora posti preferiti… tutto deserto!</p> : (
                     <ul className="favorites-location-list">
                         {favoriteLocations.map((l) => (
